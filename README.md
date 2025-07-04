@@ -57,14 +57,18 @@ These thresholds ensure that each step performs within acceptable limits, and an
 
 Two workflows are included:
 
--run-playwright-ui-tests.yml: Runs Playwright UI tests on every push
-run-performance-test.yml: Runs Artillery performance tests and uploads results to Artillery Cloud
+- run-playwright-ui-tests.yml: Runs Playwright UI tests on every push
+##### UI tests  [![Playwright Tests](https://github.com/AlyonaCher/ui-performance-artillery-goodreads/actions/workflows/run-playwright-ui-tests.yml/badge.svg)](https://github.com/AlyonaCher/ui-performance-artillery-goodreads/actions/workflows/run-playwright-ui-tests.yml)
+- run-performance-test.yml: Runs Artillery performance tests and uploads results to Artillery Cloud 
+##### performance tests  [![Playwright Tests](https://github.com/AlyonaCher/ui-performance-artillery-goodreads/actions/workflows/run-performance-test.yml/badge.svg)](https://github.com/AlyonaCher/ui-performance-artillery-goodreads/actions/workflows/run-performance-test.yml)
 
 ### Artillery Cloud Integration
 
 Performance test results are visualized and tracked over time using Artillery Cloud. This helps ensure that performance regressions are caught early and trends are monitored.
 
-📷 Screenshots of Artillery Cloud dashboards
+![TScreenshots of Artillery Cloud dashboards](image.png)
+
+Full report [report](https://app.artillery.io/share/sh_d2092bd85027966365c7fbf1b1d12413041ed8768e54e29cd62bca42176b332d)
 
 ### Benefits Demonstrated
 Unified testing strategy in one repo

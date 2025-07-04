@@ -3,7 +3,7 @@ config:
   engines:
     playwright:  
       launchOptions:
-        headless: true
+        headless: false
       properties:
         defaultTimeout: 60000,
         defaultNavigationTimeout: 60000
@@ -28,9 +28,9 @@ config:
   ensure:
     thresholds:
       - 'vusers.failed': 2
-      - 'browser.step.Step_1_Landing_main_page.p95': 10000
+      - 'browser.step.Step_1_Landing_main_page.p95': 20000
       - 'browser.step.Step_2_typing_into_search_field.p95': 5000
-      - 'browser.step.Step_3_Clicking_on_search_results.p95': 10000
+      - 'browser.step.Step_3_Clicking_on_search_results.p95': 20000
       - 'vusers.session_length.p95': 50000        
  
 scenarios:

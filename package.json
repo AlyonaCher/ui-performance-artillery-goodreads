@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "ui": "npx playwright test tests/ui/ --project chromium"
+    "ui": "npx playwright test tests/ui/ --project chromium",
+    "performance": "npx artillery run tests/performance/runner/artillery-test-runner.yml"
   },
   "keywords": [],
   "author": "",

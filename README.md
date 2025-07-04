@@ -80,10 +80,10 @@ Easy integration with CI/CD pipelines
 npm install
 
 ### Run UI tests
-npx playwright test
+npm run ui
 
 ### Run performance tests
-npx artillery run tests/performance/searchBook.artillery.js
+npm run performance
 
 ---
 

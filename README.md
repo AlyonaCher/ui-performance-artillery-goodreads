@@ -41,13 +41,15 @@ Artillery uses **browser steps** to simulate and measure each user interaction. 
 
 ### Thresholds Example
 
-`ensure:  `
-`thresholds:`
-`    - 'vusers.failed': 2`
-`    - 'browser.step.Step_1_Landing_main_page.p95': 10000`
-`    - 'browser.step.Step_2_typing_into_search_field.p95': 5000`
-`    - 'browser.step.Step_3_Clicking_on_search_results.p95': 10000`
-`    - 'vusers.session_length.p95': 50000`
+```
+ensure:  
+   thresholds:
+    - 'vusers.failed': 2
+    - 'browser.step.Step_1_Landing_main_page.p95': 10000
+    - 'browser.step.Step_2_typing_into_search_field.p95': 5000
+    - 'browser.step.Step_3_Clicking_on_search_results.p95': 10000
+    - 'vusers.session_length.p95': 50000
+```
 
 These thresholds ensure that each step performs within acceptable limits, and any regression is caught early.
 

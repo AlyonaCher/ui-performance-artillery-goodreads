@@ -1,0 +1,39 @@
+config:
+  target: "https://www.goodreads.com/"
+  engines:
+    playwright:  
+      launchOptions:
+        headless: false
+      properties:
+        defaultTimeout: 60000,
+        defaultNavigationTimeout: 60000
+      trace:
+        screenshots: true
+
+  processor: "../artillery-scripts/search-book.ts"  
+  
+  phases:
+  # Constant arrival rate
+  # injects one user every second for 10 seconds 
+  # The following example generates 2 virtual users every second for 1 minute, with no more than 80 concurrent virtual users at any given time
+  - name: constantArrival
+    duration: 1m # or 30m, 1h, 1d
+    arrivalRate: 1
+    maxVusers: 5
+
+  plugins:
+    ensure: {}
+  # Configure automated checks
+  # https://www.artillery.io/docs/reference/extensions/ensure
+  ensure:
+    thresholds:
+      - 'vusers.failed': 2
+      - 'browser.step.Step_1_Landing_main_page.p95': 10000
+      - 'browser.step.Step_2_typing_into_search_field.p95': 5000
+      - 'browser.step.Step_3_Clicking_on_search_results.p95': 10000
+      - 'vusers.session_length.p95': 50000        
+ 
+scenarios:
+  - name: SearchBook
+    engine: playwright
+    testFunction: "searchBookArtilleryScript"

@@ -1,0 +1,75 @@
+name: Book search performance test for concurrent users (Playwright+Artillery)
+
+on:
+
+    workflow_dispatch:
+        inputs:
+            maxVusers:
+                type: choice
+                description: 'maxVusers defines the maximum number of virtual users (VUs) that can be active at any given time during the test. Example: maxVusers: 15 ensures no more than 15 VUs are active simultaneously, even if the arrival rate would otherwise create more.'
+                required: false            
+                options:
+                - 5  
+                - 10         
+                - 15
+
+jobs:  
+  
+  book-search-with-concurrent-users-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install -g artillery playwright
+     
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Install Playwright Reporter
+        run: npm install @testomatio/reporter --save-dev
+
+      - name: Run Artillery tests
+        run: |
+          echo "MAX_CONCURRENT_USERS is $MAX_CONCURRENT_USERS"
+      
+          # Build the override JSON using jq
+          OVERRIDE=$(jq -n \
+            --arg max "$MAX_CONCURRENT_USERS" \
+            '{config: {phases: [{name: "constantArrival", duration: "1m", arrivalRate: 1, maxVusers: ($max | tonumber)}]}}')
+      
+          echo "Override JSON: $OVERRIDE"
+      
+          npx artillery run tests/performance/runner/artillery-test-runner.yml \
+            --overrides "$OVERRIDE" \
+            --output search_book_performance_test_results.json \
+            --record
+        env:
+          MAX_CONCURRENT_USERS: ${{ github.event.inputs.maxVusers || 5 }}
+          ARTILLERY_CLOUD_API_KEY: ${{ secrets.ARTILLERY_CLOUD_API_KEY }}  
+
+      - name: Upload Artillery HTML report
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-tests-report
+          path: search_book_performance_test_results.json
+
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+            name: 'screenshots of failed tests'
+            path: screenshots/
+            retention-days: 30
+
+   

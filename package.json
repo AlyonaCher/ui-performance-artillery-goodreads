@@ -1,0 +1,24 @@
+{
+  "name": "arlillery-ui-performance-goodreads",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "ui": "npx playwright test tests/ui/ --project chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.10",
+    "artillery": "^2.0.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "dotenv": "^17.0.1"
+  }
+}

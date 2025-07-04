@@ -3,7 +3,7 @@ config:
   engines:
     playwright:  
       launchOptions:
-        headless: false
+        headless: true
       properties:
         defaultTimeout: 60000,
         defaultNavigationTimeout: 60000

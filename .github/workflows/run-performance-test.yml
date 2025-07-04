@@ -1,4 +1,4 @@
-name: Book search performance test for concurrent users (Playwright+Artillery)
+name: Performance UI tests
 
 on:
 

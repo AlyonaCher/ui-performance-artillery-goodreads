@@ -1,4 +1,4 @@
-name: Goodreads ui Tests
+name: UI playwright tests
 
 on:
   # push:
